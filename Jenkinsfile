@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage ('Git clone') {
+        stage('Git clone') {
             steps {
                 git branch: 'main', url: 'https://github.com/Chriscloudaz/resume-site.git'
             }
@@ -11,12 +11,15 @@ pipeline {
             steps {
                 script {
                     withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'sam-jenkins-demo-credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        sh "aws s3 cp index.html s3://${params.S3BUCKET}/"
-                        sh "aws s3 cp css s3://${params.S3BUCKET}/ --recursive"
-                        sh "aws s3 cp fonts s3://${params.S3BUCKET}/ --recursive"
-                        sh "aws s3 cp img s3://${params.S3BUCKET}/ --recursive"
-                        sh "aws s3 cp scss s3://${params.S3BUCKET}/ --recursive"
-                        sh "aws s3 cp js s3://${params.S3BUCKET}/ --recursive"
+                        // Copy index.html
+                        sh "aws s3 cp index.html s3://${params.S3BUCKET}/index.html"
+                        
+                        // Copy other directories with recursive option
+                        sh "aws s3 cp css s3://${params.S3BUCKET}/css/ --recursive"
+                        sh "aws s3 cp fonts s3://${params.S3BUCKET}/fonts/ --recursive"
+                        sh "aws s3 cp img s3://${params.S3BUCKET}/img/ --recursive"
+                        sh "aws s3 cp scss s3://${params.S3BUCKET}/scss/ --recursive"
+                        sh "aws s3 cp js s3://${params.S3BUCKET}/js/ --recursive"
                     }
                 }
             }
