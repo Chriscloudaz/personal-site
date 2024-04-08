@@ -1,6 +1,12 @@
 pipeline {
     agent any
     stages {
+        stage ('Git clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Chriscloudaz/resume-site.git'
+            }
+        }
+
         stage('Deploy to s3') {
             steps {
                 script {
