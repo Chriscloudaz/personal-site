@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: resume
+  template:
+    metadata:
+      labels:
+        name: resume
+    spec:
+      containers:
+        - name: resume
+          image: chriscloudaz/resume-site:v1
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
