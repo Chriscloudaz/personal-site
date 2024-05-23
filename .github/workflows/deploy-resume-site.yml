@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main 
+    paths:
+      - 'resume-site/**'
+      - 'Dockerfile'
+      - '.github/workflows/deploy-resume-site.yml'
 
 jobs:
   build:
