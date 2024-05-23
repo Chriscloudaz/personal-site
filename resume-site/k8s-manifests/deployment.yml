@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: resume-deployment
+  name: resume-site-deployment
 spec:
   replicas: 2
   selector:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: resume
-          image: chriscloudaz/resume-site:v1
+          image: <IMAGE>
           ports:
             - containerPort: 80
           resources:
@@ -24,3 +24,16 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "100m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-service
+spec:
+  type: LoadBalancer
+  selector:
+    name: resume
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
