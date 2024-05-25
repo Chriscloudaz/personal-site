@@ -1,4 +1,4 @@
-name: Deploy to DigitalOcean Kubernetes
+name: Deploy Main Site to DigitalOcean Kubernetes
 on:
   push:
     branches:
@@ -35,7 +35,7 @@ jobs:
       run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ secrets.CLUSTER_NAME }}
 
     - name: Deploy to DigitalOcean Kubernetes
-      run: kubectl apply -f $GITHUB_WORKSPACE/main-site/k8s-manifests/deployment.yml -n main-site
+      run: kubectl apply -f $GITHUB_WORKSPACE/main-site/k8s/deployment.yml -n main-site
 
     - name: Verify deployment
       run: kubectl rollout status deployment/main-site-deployment -n main-site
