@@ -29,7 +29,7 @@ jobs:
       run: docker push ${{ secrets.REGISTRY_NAME }}/personal-site/main-site:$(echo $GITHUB_SHA | head -c7)
 
     - name: Update deployment file
-      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|${{ secrets.REGISTRY_NAME }}/personal-site/main-site:'${TAG}'|' $GITHUB_WORKSPACE/main-site/k8s-manifests/deployment.yml
+      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|${{ secrets.REGISTRY_NAME }}/personal-site/main-site:'${TAG}'|' $GITHUB_WORKSPACE/main-site/k8s/deployment.yml
 
     - name: Save DigitalOcean kubeconfig with short-lived credentials
       run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ secrets.CLUSTER_NAME }}
