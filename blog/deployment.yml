@@ -100,7 +100,7 @@ spec:
           - name: logging__level
             value: info
           - name: url
-            value: http://blog.parbtechsolutions.com
+            value: http://blog.blog.parbtechsolutions.com
           - name: mail__transport
             value: SMTP
           - name: mail__options__service
@@ -136,7 +136,7 @@ metadata:
   labels:
     app: ghost
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: ghost
     tier: frontend
@@ -164,3 +164,27 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blog-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "blog.parbtechsolutions.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: ghost-service
+            port:
+              number: 2368
+  tls:
+  - hosts: 
+    - blog.parbtechsolutions.com
+    secretName: blog-tls

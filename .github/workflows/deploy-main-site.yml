@@ -4,8 +4,8 @@ on:
     branches:
       - main 
     paths:
-      - 'resume-site/**'
-      - '.github/workflows/deploy-resume-site.yml'
+      - 'main-site/**'
+      - '.github/workflows/deploy-main-site.yml'
 
 jobs:
   build:
@@ -20,22 +20,22 @@ jobs:
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
     - name: Build container image
-      run: docker build -t ${{ secrets.REGISTRY_NAME }}/personal-site/resume-site:$(echo $GITHUB_SHA | head -c7) resume-site/Dockerfile
+      run: docker build -t ${{ secrets.REGISTRY_NAME }}/personal-site/main-site:$(echo $GITHUB_SHA | head -c7) main-site/Dockerfile
 
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       run: doctl registry login --expiry-seconds 1200
 
     - name: Push image to DigitalOcean Container Registry
-      run: docker push ${{ secrets.REGISTRY_NAME }}/personal-site/resume-site:$(echo $GITHUB_SHA | head -c7)
+      run: docker push ${{ secrets.REGISTRY_NAME }}/personal-site/main-site:$(echo $GITHUB_SHA | head -c7)
 
     - name: Update deployment file
-      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|${{ secrets.REGISTRY_NAME }}/personal-site/resume-site:'${TAG}'|' $GITHUB_WORKSPACE/resume-site/k8s-manifests/deployment.yml
+      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|${{ secrets.REGISTRY_NAME }}/personal-site/main-site:'${TAG}'|' $GITHUB_WORKSPACE/main-site/k8s-manifests/deployment.yml
 
     - name: Save DigitalOcean kubeconfig with short-lived credentials
       run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ secrets.CLUSTER_NAME }}
 
     - name: Deploy to DigitalOcean Kubernetes
-      run: kubectl apply -f $GITHUB_WORKSPACE/resume-site/k8s-manifests/deployment.yml -n resume-site
+      run: kubectl apply -f $GITHUB_WORKSPACE/main-site/k8s-manifests/deployment.yml -n main-site
 
     - name: Verify deployment
-      run: kubectl rollout status deployment/resume-site-deployment -n resume-site
+      run: kubectl rollout status deployment/main-site-deployment -n main-site

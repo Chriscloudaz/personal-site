@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: resume-site-deployment
+  name: main-site-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      name: resume
+      name: main-site
   template:
     metadata:
       labels:
-        name: resume
+        name: main-site
     spec:
       containers:
-        - name: resume
+        - name: main-site
           image: <IMAGE>
           ports:
             - containerPort: 80
@@ -28,11 +28,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: resume-service
+  name: main-site-service
 spec:
   type: ClusterIP
   selector:
-    name: resume
+    name: main-site
   ports:
     - protocol: TCP
       port: 80
@@ -41,12 +41,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: resume-site-deployment
+  name: main-site-deployment
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: resume-site-deployment
+    name: main-site-site-deployment
   minReplicas: 1
   maxReplicas: 10
   metrics:
@@ -60,23 +60,23 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: resume-site-ingress
+  name: main-site-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
   rules:
-  - host: "resume.parbtechsolutions.com"
+  - host: "parbtechsolutions.com"
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: resume-service
+            name: main-site-service
             port:
               number: 80
   tls:
   - hosts: 
-    - resume.parbtechsolutions.com
-    secretName: resume-tls
+    - parbtechsolutions.com
+    secretName: main-site-tls
