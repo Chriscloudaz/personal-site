@@ -1,4 +1,4 @@
-name: Deploy to DigitalOcean Kubernetes
+name: Deploy Blog to DigitalOcean Kubernetes
 on:
   push:
     branches:
