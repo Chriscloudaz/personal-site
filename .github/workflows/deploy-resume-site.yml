@@ -1,4 +1,4 @@
-name: Deploy to DigitalOcean Kubernetes
+name: Deploy Resume to DigitalOcean Kubernetes
 on:
   push:
     branches:
