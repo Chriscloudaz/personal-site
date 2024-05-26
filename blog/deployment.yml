@@ -81,9 +81,15 @@ spec:
           - name: database__client
             value: mysql
           - name: database__connection__host
-            value: private-personal-site-db-mysql-do-user-15714856-0.c.db.ondigitalocean.com
+            valueFrom:
+              secretKeyRef:
+                name: ghost-pass
+                key: database_host
           - name: database__connection__port
-            value: "25060"
+            valueFrom:
+              secretKeyRef:
+                name: ghost-pass
+                key: database_port
           - name: ssl
             value: "require"
           - name: database__connection__user
@@ -100,7 +106,7 @@ spec:
           - name: logging__level
             value: info
           - name: url
-            value: http://blog.blog.parbtechsolutions.com
+            value: https://blog.parbtechsolutions.com
           - name: mail__transport
             value: SMTP
           - name: mail__options__service
