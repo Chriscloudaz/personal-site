@@ -3,10 +3,15 @@ kind: Deployment
 metadata:
   name: mario-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       name: mario
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
