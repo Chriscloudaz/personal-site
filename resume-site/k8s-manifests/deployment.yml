@@ -7,6 +7,11 @@ spec:
   selector:
     matchLabels:
       name: resume
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -55,7 +60,7 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 50
+        averageUtilization: 70
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
