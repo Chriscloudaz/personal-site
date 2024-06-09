@@ -10,10 +10,10 @@ DNS in managed with AWS Route53.
 Continuous deployment is automated with GitHub Actions, streamlining updates and ensuring seamless integration of new features.
 
 ## Links
-- **Main site**: parbtechsolutions.com
-- **Blog**: blog.parbtechsolutions.com
-- **Cloud resume**: resume.parbtechsolutions.com
-- **Games**: games.parbtechsolutions.com
+- **Main site**: [parbtechsolutions.com](https://parbtechsolutions.com/)
+- **Blog**: [blog.parbtechsolutions.com](https://blog.parbtechsolutions.com/)
+- **Cloud resume**: [resume.parbtechsolutions.com](https://resume.parbtechsolutions.com/)
+- **Games**: [games.parbtechsolutions.com](https://games.parbtechsolutions.com/)
   
 ## Repo Structure
 
