@@ -33,7 +33,7 @@ metadata:
   labels:
     app: ghost
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: ghost
@@ -77,8 +77,8 @@ spec:
             memory: '128Mi'
             cpu: '100m'
           limits:
-            memory: '256Mi'
-            cpu: '150m'
+            memory: '1000Mi'
+            cpu: '900m'
         env:
           - name: NODE_ENV
             value: production
@@ -170,13 +170,13 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: blog-deployment
+  name: blog-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: blog-deployment
-  minReplicas: 2
+  minReplicas: 1
   maxReplicas: 10
   metrics:
   - type: Resource
