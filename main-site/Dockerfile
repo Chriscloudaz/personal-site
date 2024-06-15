@@ -1,12 +1,10 @@
 # Use the official Nginx image from the Docker Hub
 FROM nginx:alpine
 
-# Copy the static HTML files to the Nginx HTML directory
-COPY index.html /usr/share/nginx/html
-COPY /css /usr/share/nginx/html/css/
-COPY /favicon_io /usr/share/nginx/html/favicon_io
+# Copy the static HTML files and directories to the Nginx HTML directory
+COPY site-content/. /usr/share/nginx/html/
 
-# Expose port 80 to the outside world
+# Expose port 80
 EXPOSE 80
 
 # Start Nginx when the container launches
