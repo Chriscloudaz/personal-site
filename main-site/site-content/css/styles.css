@@ -1,0 +1,159 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style for body */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* White text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container to center everything */
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Style for header */
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 3rem; /* Larger font size for the header */
+    margin-bottom: 10px;
+    color: #FFFFFF; /* White text */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+nav ul li {}
+
+nav ul li a {
+    color: #FFFFFF; /* White text */
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: 2px solid #FFFFFF; /* White border */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 5px;
+}
+
+nav ul li a:hover {
+    background-color: #FFFFFF; /* White background */
+    color: #1F1F1F; /* Dark gray text */
+}
+
+/* Style for main content */
+main {
+    margin-bottom: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+section h2 {
+    font-size: 2.5rem; /* Larger font size for section headings */
+    margin-bottom: 0px;
+    color: #FFFFFF; /* White text */
+}
+
+#tech-stack {
+    text-align: justify;
+}
+
+.center-heading {
+    text-align: center; /* Center the h2 */
+}
+
+.tech-stack-content {
+    max-width: 700px; /* Adjust as needed */
+    margin: 0 auto; /* Center the content */
+}
+
+.tech-stack-content p {
+    margin-bottom: 20px; /* Add space between paragraphs */
+    line-height: 1.4; /* Ensure proper line spacing */
+    text-align: justify; /* Justify text */
+}
+
+/* Style for contact section */
+#contact p {
+    font-size: 1.2rem;
+    color: #FFFFFF; /* White text */
+}
+
+#contact p a {
+    color: #FFFFFF; /* White text */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+#contact p a:hover {
+    color: #1e90ff; /* Light blue text */
+}
+
+#contact i {
+    margin-right: 8px;
+}
+
+/* Style for footer */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #333;
+    color: #fff;
+    position: fixed; /* Fixed positioning */
+    bottom: 0;
+    width: 100%;
+}
+
+/* Adjust main content margin to create space for the fixed footer */
+main {
+    margin-bottom: 60px; /* Set to footer height + some additional space */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    nav ul li a {
+        padding: 10px;
+        margin: 5px 0;
+    }
+
+    /* Adjust font sizes for responsiveness */
+    header h1 {
+        font-size: 2rem;
+    }
+
+    section h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Style for GitHub repository URL */
+#tech-stack a.github-link {
+    color: #90c0ff; /* Light blue color for GitHub repository URL */
+}
